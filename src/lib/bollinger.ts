@@ -52,12 +52,14 @@ export function registerBollingerIndicator() {
           return;
         }
 
+        // Calculate SMA (Simple Moving Average)
         let sum = 0;
         for (let j = 0; j < length; j++) {
           sum += dataList[computeIndex - j].close;
         }
         const mid = sum / length;
 
+        // Calculate Standard Deviation
         let varianceSum = 0;
         for (let j = 0; j < length; j++) {
           const diff = dataList[computeIndex - j].close - mid;
@@ -65,6 +67,7 @@ export function registerBollingerIndicator() {
         }
         const stdDev = Math.sqrt(varianceSum / length);
 
+        // Calculate Bollinger Bands
         const upper = mid + multiplier * stdDev;
         const lower = mid - multiplier * stdDev;
 
